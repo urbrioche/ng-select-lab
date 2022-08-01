@@ -1,15 +1,19 @@
-<ng-select #ngSelect [items]="cities" [multiple]="true">
+<ng-select #tNgSelect [items]="cities" [multiple]="true">
   <ng-template ng-multi-label-tmp>
-    <div *ngIf="ngSelect.selectedValues.length <3" class="ng-values-list" style="display: flex">
-      <div class="ng-value" *ngFor="let item of ngSelect.selectedItems">
-        <span class="ng-value-label">{{item.label}}</span>
-        <span class="ng-value-icon right" (click)="ngSelect.clearItem(item.value)">×</span>
-      </div>
-    </div>
-    <div *ngIf="ngSelect.selectedValues.length >=3" class="ng-summary-list">
-      <div class="ng-value">
-        <span class="ng-value-label">{{ ngSelect.selectedValues.length }} Selected</span>
-      </div>
-    </div>
+    <ng-container *ngTemplateOutlet="ngLabelTemplate; context: {$implicit: tNgSelect}"></ng-container>
   </ng-template>
 </ng-select>
+
+<ng-template #ngLabelTemplate let-ngSelect>
+  <div *ngIf="ngSelect.selectedValues.length <3" class="ng-values-list" style="display: flex">
+    <div class="ng-value" *ngFor="let item of ngSelect.selectedItems">
+      <span class="ng-value-label">{{item.label}}</span>
+      <span class="ng-value-icon right" (click)="ngSelect.clearItem(item.value)">×</span>
+    </div>
+  </div>
+  <div *ngIf="ngSelect.selectedValues.length >=3" class="ng-summary-list">
+    <div class="ng-value">
+      <span class="ng-value-label">{{ ngSelect.selectedValues.length }} Selected</span>
+    </div>
+  </div>
+</ng-template>
