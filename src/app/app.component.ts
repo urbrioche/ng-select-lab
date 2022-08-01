@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ng-select-lab';
+  items = ["1","2"];
+  cities = ['Taipei', 'Taichung', 'Kaohsiung'];
 }
