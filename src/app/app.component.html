@@ -1,10 +1,20 @@
+<!--https://ithelp.ithome.com.tw/articles/10249059-->
+<!--https://ithelp.ithome.com.tw/articles/10205829-->
 <ng-select #tNgSelect [items]="cities" [multiple]="true">
   <ng-template ng-multi-label-tmp>
-    <ng-container *ngTemplateOutlet="ngLabelTemplate; context: {$implicit: tNgSelect}"></ng-container>
+    <ng-container
+      *ngTemplateOutlet="ngLabelTemplate; context: {$implicit: 'this is default prop', ngSelect: tNgSelect}"></ng-container>
   </ng-template>
 </ng-select>
 
-<ng-template #ngLabelTemplate let-ngSelect>
+<ng-select #tNgSelect1 [items]="numbers" [multiple]="true" [style.margin-top.px]="6">
+  <ng-template ng-multi-label-tmp>
+    <ng-container
+      *ngTemplateOutlet="ngLabelTemplate; context: {$implicit: 'this is default prop', ngSelect: tNgSelect1}"></ng-container>
+  </ng-template>
+</ng-select>
+
+<ng-template #ngLabelTemplate let-ngSelect="ngSelect">
   <div *ngIf="ngSelect.selectedValues.length <3" class="ng-values-list" style="display: flex">
     <div class="ng-value" *ngFor="let item of ngSelect.selectedItems">
       <span class="ng-value-label">{{item.label}}</span>
@@ -13,7 +23,7 @@
   </div>
   <div *ngIf="ngSelect.selectedValues.length >=3" class="ng-summary-list">
     <div class="ng-value">
-      <span class="ng-value-label">{{ ngSelect.selectedValues.length }} Selected</span>
+      <span class="ng-value-label">{{ ngSelect.selectedValues.length }} Item(s) Selected</span>
     </div>
   </div>
 </ng-template>
